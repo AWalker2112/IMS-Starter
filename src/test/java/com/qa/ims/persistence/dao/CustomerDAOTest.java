@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.utils.DBUtils;
@@ -15,6 +17,10 @@ public class CustomerDAOTest {
 
 	private final CustomerDAO DAO = new CustomerDAO();
 
+	
+//	@Rule
+//	public ExpectedException exceptionRule = ExpectedException.none();
+	
 	@Before
 	public void setup() {
 		DBUtils.connect();
@@ -25,7 +31,15 @@ public class CustomerDAOTest {
 	public void testCreate() {
 		final Customer created = new Customer(2L, "chris", "perrins");
 		assertEquals(created, DAO.create(created));
+	
 	}
+	
+//	@Test (expected=IllagalArgumentExeption.class)
+//	public void testCreateException() {
+//		final Customer created = new Customer(2L, "chris", "perrins");
+//		exceptionRule.expectMessage(DAO.create(created));
+//	}
+	
 
 	@Test
 	public void testReadAll() {
