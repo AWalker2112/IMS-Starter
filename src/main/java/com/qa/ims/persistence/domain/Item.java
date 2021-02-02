@@ -21,7 +21,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "itemID:" + itemID + ", itemName:" + itemName + ", value:" + value + "]";
+		return "itemID:" + itemID + ", itemName:" + itemName + ", value:" + value ;
 	}
 
 	public long getItemID() {
