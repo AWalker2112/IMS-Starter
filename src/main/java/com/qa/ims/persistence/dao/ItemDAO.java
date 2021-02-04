@@ -93,7 +93,7 @@ public class ItemDAO implements Dao<Item>{
 
 	@Override
 	public Item read(Long ItemID) {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE item_id = ?");) {
 			statement.setLong(1, ItemID);
