@@ -34,18 +34,18 @@ public class OrderController implements CrudController<Order> {
 	public List<Order> readAll() {
 
 		while (true) {
-			LOGGER.info("Please choose (1/2/3)\n1. All items in all orders\n2. Specific order\n3. Return");
-			Long choice = utils.getLong();
+			LOGGER.info("Please choose (All/Single/Return)\nALL: All items in all orders\nSINGLE: Specific order\nRETURN: Return to the menu before");
+			String choice = utils.getString();
 			
 
-			if (choice == 1) {
+			if (choice.toLowerCase().equals("all")) {
 				List<Order> orders = orderDAO.readAllFormated();
 				for (Order order : orders) {
 					LOGGER.info(order);
 				}
 				
 				continue;
-			} else if (choice == 2) {
+			} else if (choice.toLowerCase().equals("single")) {
 				LOGGER.info("Please enter a order ID");
 				Long fkOrderID = utils.getLong();
 				List<Order> orders = orderDAO.readAllFormatedSingleOrder(fkOrderID);
@@ -56,7 +56,7 @@ public class OrderController implements CrudController<Order> {
 				LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
 				
 				continue;
-			} else if (choice == 3) {
+			} else if (choice.toLowerCase().equals("return")) {
 				List<Order> orders = orderDAO.readAllFormated();
 				return orders;
 			}
@@ -103,7 +103,7 @@ public class OrderController implements CrudController<Order> {
 		// TODO Auto-generated method stub
 
 		while (true) {
-			LOGGER.info("Would you like to add or remove an item? (Add/Remove/Return)");
+			LOGGER.info("Would you like to add or remove an item? (Add/Remove/Return) \nADD: Add an item to a order \nREMOVE: Remove an item from a order \nRETURN: Return to the menu before");
 			String addRemove = utils.getString();
 
 			if (addRemove.toLowerCase().equals("return")) {
