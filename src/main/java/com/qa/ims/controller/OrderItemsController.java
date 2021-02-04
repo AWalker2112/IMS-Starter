@@ -88,7 +88,7 @@ public class OrderItemsController implements CrudController<OrderItems> {
 
 		OrderItems orderitem = orderItemDAO.create(new OrderItems(fkOrderID, fkItemID, quantity));
 
-		LOGGER.info("OrderItem created");
+		LOGGER.info("Item and quantity has been added to a order");
 
 		LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
 		return orderitem;
