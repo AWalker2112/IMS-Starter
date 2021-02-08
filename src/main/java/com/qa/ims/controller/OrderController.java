@@ -22,11 +22,22 @@ public class OrderController implements CrudController<Order> {
 	private OrderItemsDAO orditeDAO = new OrderItemsDAO();
 	private Utils utils = new Utils();
 
-	private OrderItemsController orderitems = new OrderItemsController(orditeDAO, utils);
-
 	public OrderController(OrderDAO orderDAO, Utils utils) {
 		super();
 		this.orderDAO = orderDAO;
+		this.utils = utils;
+	}
+
+	public OrderController(OrderItemsDAO orditeDAO, Utils utils) {
+		super();
+		this.orditeDAO = orditeDAO;
+		this.utils = utils;
+	}
+
+	public OrderController(OrderDAO orderDAO, OrderItemsDAO orditeDAO, Utils utils) {
+		super();
+		this.orderDAO = orderDAO;
+		this.orditeDAO = orditeDAO;
 		this.utils = utils;
 	}
 
@@ -34,16 +45,16 @@ public class OrderController implements CrudController<Order> {
 	public List<Order> readAll() {
 
 		while (true) {
-			LOGGER.info("Please choose (All/Single/Return)\nALL: All items in all orders\nSINGLE: Specific order\nRETURN: Return to the menu before");
+			LOGGER.info(
+					"Please choose (All/Single/Return)\nALL: All items in all orders\nSINGLE: Specific order\nRETURN: Return to the menu before");
 			String choice = utils.getString();
-			
 
 			if (choice.toLowerCase().equals("all")) {
-				List<Order> orders = orderDAO.readAllFormated();
+				List<Order> orders = orderDAO.readAll();
 				for (Order order : orders) {
 					LOGGER.info(order);
 				}
-				
+
 				continue;
 			} else if (choice.toLowerCase().equals("single")) {
 				LOGGER.info("Please enter a order ID");
@@ -51,16 +62,16 @@ public class OrderController implements CrudController<Order> {
 				List<Order> orders = orderDAO.readAllFormatedSingleOrder(fkOrderID);
 				for (Order order : orders) {
 					LOGGER.info(order);
-					
+
 				}
 				LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
-				
+
 				continue;
 			} else if (choice.toLowerCase().equals("return")) {
-				List<Order> orders = orderDAO.readAllFormated();
+				List<Order> orders = orderDAO.readAll();
 				return orders;
 			}
-			
+
 			else {
 				LOGGER.info("Incorrect statement");
 				continue;
@@ -69,6 +80,10 @@ public class OrderController implements CrudController<Order> {
 		}
 
 	}
+	
+	/**
+	 * Creates an order by taking in user input
+	 */
 
 	@Override
 	public Order create() {
@@ -76,6 +91,7 @@ public class OrderController implements CrudController<Order> {
 		LOGGER.info("Please enter a customer ID");
 		Long fkCustomerID = utils.getLong();
 		Order order = orderDAO.create(new Order(fkCustomerID));
+		createItem();
 
 		LOGGER.info("Order created");
 
@@ -87,7 +103,7 @@ public class OrderController implements CrudController<Order> {
 				return order;
 			} else if (yesNo.equals("Y")) {
 
-				orderitems.create();
+				createItem();
 
 				continue;
 			} else {
@@ -98,12 +114,40 @@ public class OrderController implements CrudController<Order> {
 
 	}
 
+	/**
+	 * Creates a item into an order by taking in user input
+	 */
+
+	public OrderItems createItem() {
+
+		Long fkOrderID = orderDAO.readID();
+
+		LOGGER.info("Please enter a item ID");
+		Long fkItemID = utils.getLong();
+
+		LOGGER.info("Please enter a quantity");
+		Long quantity = utils.getLong();
+
+		OrderItems orderitem = orditeDAO.create(new OrderItems(fkOrderID, fkItemID, quantity));
+
+		LOGGER.info("Item added");
+
+		LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
+		return orderitem;
+
+	}
+	
+	/**
+	 * Creates a updates an order either adding or removing an item by taking in user input
+	 */
+
 	@Override
 	public Order update() {
 		// TODO Auto-generated method stub
 
 		while (true) {
-			LOGGER.info("Would you like to add or remove an item? (Add/Remove/Return) \nADD: Add an item to a order \nREMOVE: Remove an item from a order \nRETURN: Return to the menu before");
+			LOGGER.info(
+					"Would you like to add or remove an item? (Add/Remove/Return) \nADD: Add an item to a order \nREMOVE: Remove an item from a order \nRETURN: Return to the menu before");
 			String addRemove = utils.getString();
 
 			if (addRemove.toLowerCase().equals("return")) {
@@ -111,18 +155,41 @@ public class OrderController implements CrudController<Order> {
 
 			} else if (addRemove.toLowerCase().equals("add")) {
 
-				orderitems.update();
+				updateItem();
 
 				continue;
 			} else if (addRemove.toLowerCase().equals("remove")) {
 
-				orderitems.delete();
+				deleteItem();
 			} else {
 				LOGGER.info("Incorrect statement");
 				continue;
 			}
 		}
 
+	}
+
+	/**
+	 * Updates an existing Item by taking in user input
+	 */
+
+	public OrderItems updateItem() {
+
+		LOGGER.info("Please enter a order ID");
+		Long fkOrderID = utils.getLong();
+
+		LOGGER.info("Please enter a item ID");
+		Long fkItemID = utils.getLong();
+
+		LOGGER.info("Please enter a quantity");
+		Long quantity = utils.getLong();
+
+		OrderItems orderitem = orditeDAO.create(new OrderItems(fkOrderID, fkItemID, quantity));
+
+		LOGGER.info("Item and quantity has been added to a order");
+
+		LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
+		return orderitem;
 	}
 
 	@Override
@@ -132,6 +199,23 @@ public class OrderController implements CrudController<Order> {
 		Long orderID = utils.getLong();
 		orderDAO.deleteOrderItems(orderID);
 		return orderDAO.delete(orderID);
+	}
+
+	/**
+	 * Deletes an existing item by the id of the item in the order
+	 * 
+	 * @return
+	 */
+
+	public int deleteItem() {
+
+		LOGGER.info("Please enter the id of the order");
+		Long orderID = utils.getLong();
+
+		LOGGER.info("Please enter the id of the item you would like to delete");
+		Long itemsID = utils.getLong();
+
+		return orditeDAO.deleteOrderItem(orderID, itemsID);
 	}
 
 }
