@@ -69,8 +69,8 @@ public class CustomerTest {
 	@Test
 	public void toStringTest() {
 		
-		System.out.println(customer2.toString());
-		assertEquals("id:3 first name:James surname:Leek", customer2.toString());
+		
+		assertEquals("Customer ID = 3, First Name = James, Surname = Leek", customer2.toString());
 	}
 	
 }

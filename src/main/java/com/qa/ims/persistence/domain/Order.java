@@ -44,9 +44,9 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "orderID=" + orderID + ", fkCustomerID=" + fkCustomerID + ", firstName=" + firstName
-				+ ", surname=" + surname + ", fkItemID=" + fkItemID + ", itemName=" + itemName + ", value=" + value
-				+ ", quantity=" + quantity ;
+		return "Order ID = " + orderID + ", Customer ID = " + fkCustomerID + ", First Name = " + firstName
+				+ ", Surname = " + surname + ", Item ID = " + fkItemID + ", Item Name = " + itemName + ", Item Value = " + value
+				+ ", Quantity = " + quantity ;
 	}
 	
 	
@@ -71,8 +71,14 @@ public class Order {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((fkCustomerID == null) ? 0 : fkCustomerID.hashCode());
+		result = prime * result + ((fkItemID == null) ? 0 : fkItemID.hashCode());
+		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
 		result = prime * result + ((orderID == null) ? 0 : orderID.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -85,17 +91,49 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
 		if (fkCustomerID == null) {
 			if (other.fkCustomerID != null)
 				return false;
 		} else if (!fkCustomerID.equals(other.fkCustomerID))
+			return false;
+		if (fkItemID == null) {
+			if (other.fkItemID != null)
+				return false;
+		} else if (!fkItemID.equals(other.fkItemID))
+			return false;
+		if (itemName == null) {
+			if (other.itemName != null)
+				return false;
+		} else if (!itemName.equals(other.itemName))
 			return false;
 		if (orderID == null) {
 			if (other.orderID != null)
 				return false;
 		} else if (!orderID.equals(other.orderID))
 			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
+		if (surname == null) {
+			if (other.surname != null)
+				return false;
+		} else if (!surname.equals(other.surname))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
 		return true;
 	}
+
+	
 
 }
