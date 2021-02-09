@@ -2,7 +2,6 @@ package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,9 +29,8 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 	public Long modelFromResultSetID(ResultSet resultSetID) throws SQLException {
-		Long orderID = resultSetID.getLong("order_ID");
 
-		return orderID;
+		return resultSetID.getLong("order_ID");
 	}
 
 	public Order modelFromResultSetAll(ResultSet resultSetAll) throws SQLException {
@@ -42,7 +40,7 @@ public class OrderDAO implements Dao<Order> {
 		String surname = resultSetAll.getString("surname");
 		Long fkItemID = resultSetAll.getLong("fk_item_id");
 		String itemName = resultSetAll.getString("item_name");
-		
+
 		Double value = resultSetAll.getDouble("item_value");
 		Long quantity = resultSetAll.getLong("quantity");
 
@@ -50,17 +48,15 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 	public Double modelFromResultSetCost(ResultSet resultSetCost) throws SQLException {
-		Double cost = resultSetCost.getDouble("SUM(item_value*quantity)");
 
-		return cost;
+		return resultSetCost.getDouble("SUM(item_value*quantity)");
 	}
 
 	/**
-	 * Reads all orders from the database and formats for user 
+	 * Reads all orders from the database and formats for user
 	 * 
 	 * @return A list of orders formated
 	 */
-
 
 	@Override
 	public List<Order> readAll() {
@@ -79,7 +75,7 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return new ArrayList<>();
 	}
-	
+
 	/**
 	 * Reads the latest order created in orders from the database
 	 * 
@@ -98,9 +94,10 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Reads the latest order created in orders from the database but only returns order ID
+	 * Reads the latest order created in orders from the database but only returns
+	 * order ID
 	 * 
 	 * @return A line entry
 	 */
@@ -118,37 +115,34 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return 0l;
 	}
-	
 
-	
 	/**
-	 * Reads a single orders from the database and formats for user 
+	 * Reads a single orders from the database and formats for user
 	 * 
 	 * @return A list of 1 order formated showing all items
 	 */
-	
+
 	public List<Order> readAllFormatedSingleOrder(long id) {
-	
-			try (Connection connection = DBUtils.getInstance().getConnection();
-					PreparedStatement statement = connection.prepareStatement(
-							"SELECT o.order_id, o.fk_customer_id, c.first_name, c.surname,oi.fk_item_id, i.item_name, i.item_value, oi.quantity  FROM orders o JOIN orders_items oi ON o.order_id = oi.fk_order_id JOIN customers c ON o.fk_customer_id = c.customer_id JOIN items i ON oi.fk_item_id = i.item_id WHERE fk_order_id = ? ORDER BY order_id;");) {
-				List<Order> orders = new ArrayList<>();
-				statement.setLong(1, id);
-				try (ResultSet resultSet = statement.executeQuery();) {
-					while (resultSet.next()) {
-						orders.add(modelFromResultSetAll(resultSet));
-					}
-					
-					return orders;
+
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement(
+						"SELECT o.order_id, o.fk_customer_id, c.first_name, c.surname,oi.fk_item_id, i.item_name, i.item_value, oi.quantity  FROM orders o JOIN orders_items oi ON o.order_id = oi.fk_order_id JOIN customers c ON o.fk_customer_id = c.customer_id JOIN items i ON oi.fk_item_id = i.item_id WHERE fk_order_id = ? ORDER BY order_id;");) {
+			List<Order> orders = new ArrayList<>();
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				while (resultSet.next()) {
+					orders.add(modelFromResultSetAll(resultSet));
 				}
-			} catch (Exception e) {
-				LOGGER.debug(e);
-				LOGGER.error(e.getMessage());
+
+				return orders;
 			}
-			return null;
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return new ArrayList<>();
 	}
-	
-	
+
 	/**
 	 * Creates a order in the database
 	 * 
@@ -156,7 +150,7 @@ public class OrderDAO implements Dao<Order> {
 
 	@Override
 	public Order create(Order order) {
-		
+
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO orders(fk_customer_id) VALUES (?)");) {
@@ -178,7 +172,7 @@ public class OrderDAO implements Dao<Order> {
 
 	@Override
 	public int delete(long id) {
-		
+
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE order_id = ?");) {
 			statement.setLong(1, id);
@@ -191,7 +185,7 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 	public int deleteOrderItems(long id) {
-		
+
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("DELETE FROM orders_items WHERE fk_order_id = ?");) {
@@ -203,7 +197,7 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Calculates the cost of a given orderID in the database
 	 * 
@@ -213,9 +207,9 @@ public class OrderDAO implements Dao<Order> {
 	public double orderCost(long id) {
 
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT SUM(item_value*quantity)  FROM orders o JOIN orders_items oi ON o.order_id = oi.fk_order_id JOIN customers c ON o.fk_customer_id = c.customer_id JOIN items i ON oi.fk_item_id = i.item_id WHERE o.order_id= (?) ;");) {
-			
-						
+				PreparedStatement statement = connection.prepareStatement(
+						"SELECT SUM(item_value*quantity)  FROM orders o JOIN orders_items oi ON o.order_id = oi.fk_order_id JOIN customers c ON o.fk_customer_id = c.customer_id JOIN items i ON oi.fk_item_id = i.item_id WHERE o.order_id= (?) ;");) {
+
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -223,7 +217,7 @@ public class OrderDAO implements Dao<Order> {
 			}
 
 		} catch (Exception e) {
-			
+
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
@@ -233,16 +227,14 @@ public class OrderDAO implements Dao<Order> {
 
 	@Override
 	public Order update(Order t) {
-		
+
 		return null;
 	}
-	
-	
+
 	@Override
 	public Order read(Long id) {
-		
+
 		return null;
 	}
-	
 
 }

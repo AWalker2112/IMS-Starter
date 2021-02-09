@@ -1,8 +1,6 @@
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +36,7 @@ public class ItemDAO implements Dao<Item>{
 	
 	@Override
 	public List<Item> readAll() {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM items");) {
@@ -55,7 +53,7 @@ public class ItemDAO implements Dao<Item>{
 	}
 
 	public Item readLatest() {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY item_id DESC LIMIT 1");) {
@@ -76,7 +74,7 @@ public class ItemDAO implements Dao<Item>{
 
 	@Override
 	public Item create(Item item) {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO items(item_name, item_value) VALUES (?, ?)");) {
@@ -92,11 +90,11 @@ public class ItemDAO implements Dao<Item>{
 	}
 
 	@Override
-	public Item read(Long ItemID) {
+	public Item read(Long itemID) {
 		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE item_id = ?");) {
-			statement.setLong(1, ItemID);
+			statement.setLong(1, itemID);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
 				return modelFromResultSet(resultSet);
@@ -118,7 +116,7 @@ public class ItemDAO implements Dao<Item>{
 	
 	@Override
 	public Item update(Item item) {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE items SET item_name = ?, item_value = ? WHERE item_id = ?");) {
@@ -142,7 +140,7 @@ public class ItemDAO implements Dao<Item>{
 
 	@Override
 	public int delete(long itemID) {
-		// TODO Auto-generated method stub
+		
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE item_id = ?");) {
 			statement.setLong(1, itemID);

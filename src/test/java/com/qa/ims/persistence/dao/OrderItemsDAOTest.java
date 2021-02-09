@@ -2,6 +2,7 @@ package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 
 import org.junit.Before;
 
@@ -22,7 +23,7 @@ public class OrderItemsDAOTest {
 
 	@Test
 	public void readAllTest() {
-		assertEquals(null, Dao.readAll());
+		assertEquals(new ArrayList<>(), Dao.readAll());
 	}
 
 	@Test

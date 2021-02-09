@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,16 +25,16 @@ public class OrderItemsDAO implements Dao<OrderItems> {
 	public OrderItems modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long orderItemID = resultSet.getLong("order_items_id");
 		Long quantity = resultSet.getLong("quantity");
-		Long fk_order_id = resultSet.getLong("fk_order_id");
-		Long fk_item_id = resultSet.getLong("fk_item_id");
+		Long fkOrderId = resultSet.getLong("fk_order_id");
+		Long fkItemId = resultSet.getLong("fk_item_id");
 
-		return new OrderItems(orderItemID, fk_order_id, fk_item_id, quantity);
+		return new OrderItems(orderItemID, fkOrderId, fkItemId, quantity);
 	}
 
 	@Override
 	public List<OrderItems> readAll() {
 		
-		return null;
+		return new ArrayList<>();
 	}
 
 	@Override
