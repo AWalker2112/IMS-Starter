@@ -6,10 +6,9 @@ import org.apache.logging.log4j.LogManager;
 
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.dao.OrderItemsDAO;
-import com.qa.ims.persistence.domain.Item;
+
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItems;
 import com.qa.ims.utils.Utils;
@@ -41,6 +40,9 @@ public class OrderController implements CrudController<Order> {
 		this.utils = utils;
 	}
 
+	String costString = "The total cost for this order is: £";
+	String incorrectString = "Incorrect statement";
+
 	@Override
 	public List<Order> readAll() {
 
@@ -49,14 +51,13 @@ public class OrderController implements CrudController<Order> {
 					"Please choose (All/Single/Return)\nALL: All items in all orders\nSINGLE: Specific order\nRETURN: Return to the menu before");
 			String choice = utils.getString();
 
-			if (choice.toLowerCase().equals("all")) {
+			if (choice.equalsIgnoreCase("all")) {
 				List<Order> orders = orderDAO.readAll();
 				for (Order order : orders) {
 					LOGGER.info(order);
 				}
 
-				continue;
-			} else if (choice.toLowerCase().equals("single")) {
+			} else if (choice.equalsIgnoreCase("single")) {
 				LOGGER.info("Please enter a order ID");
 				Long fkOrderID = utils.getLong();
 				List<Order> orders = orderDAO.readAllFormatedSingleOrder(fkOrderID);
@@ -64,23 +65,22 @@ public class OrderController implements CrudController<Order> {
 					LOGGER.info(order);
 
 				}
-				LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
+				LOGGER.info(costString + orderDAO.orderCost(fkOrderID));
 
-				continue;
-			} else if (choice.toLowerCase().equals("return")) {
-				List<Order> orders = orderDAO.readAll();
-				return orders;
+			} else if (choice.equalsIgnoreCase("return")) {
+
+				return orderDAO.readAll();
 			}
 
 			else {
-				LOGGER.info("Incorrect statement");
-				continue;
+				LOGGER.info(incorrectString);
+
 			}
 
 		}
 
 	}
-	
+
 	/**
 	 * Creates an order by taking in user input
 	 */
@@ -99,15 +99,15 @@ public class OrderController implements CrudController<Order> {
 			LOGGER.info("Would you like to add an item? (Y/N)");
 			String yesNo = utils.getString();
 
-			if (yesNo.equals("N")) {
+			if (yesNo.equalsIgnoreCase("N")) {
 				return order;
-			} else if (yesNo.equals("Y")) {
+			} else if (yesNo.equalsIgnoreCase("Y")) {
 
 				createItem();
 
 				continue;
 			} else {
-				LOGGER.info("Incorrect statement");
+				LOGGER.info(incorrectString);
 				continue;
 			}
 		}
@@ -132,38 +132,39 @@ public class OrderController implements CrudController<Order> {
 
 		LOGGER.info("Item added");
 
-		LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
+		LOGGER.info(costString + orderDAO.orderCost(fkOrderID));
 		return orderitem;
 
 	}
-	
+
 	/**
-	 * Creates a updates an order either adding or removing an item by taking in user input
+	 * Creates a updates an order either adding or removing an item by taking in
+	 * user input
 	 */
 
 	@Override
 	public Order update() {
-		// TODO Auto-generated method stub
+		
 
 		while (true) {
 			LOGGER.info(
 					"Would you like to add or remove an item? (Add/Remove/Return) \nADD: Add an item to a order \nREMOVE: Remove an item from a order \nRETURN: Return to the menu before");
 			String addRemove = utils.getString();
 
-			if (addRemove.toLowerCase().equals("return")) {
+			if (addRemove.equalsIgnoreCase("return")) {
 				return null;
 
-			} else if (addRemove.toLowerCase().equals("add")) {
+			} else if (addRemove.equalsIgnoreCase("add")) {
 
 				updateItem();
 
-				continue;
-			} else if (addRemove.toLowerCase().equals("remove")) {
+				
+			} else if (addRemove.equalsIgnoreCase("remove")) {
 
 				deleteItem();
 			} else {
-				LOGGER.info("Incorrect statement");
-				continue;
+				LOGGER.info(incorrectString);
+				
 			}
 		}
 
@@ -188,7 +189,7 @@ public class OrderController implements CrudController<Order> {
 
 		LOGGER.info("Item and quantity has been added to a order");
 
-		LOGGER.info("The total cost for this order is: £" + orderDAO.orderCost(fkOrderID));
+		LOGGER.info(costString + orderDAO.orderCost(fkOrderID));
 		return orderitem;
 	}
 
