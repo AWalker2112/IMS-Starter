@@ -9,10 +9,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+The programme as a minimum needs JAVA installed on the machine, this programme was written in JAVA 14.0.2. Choose the correct installer for your operating system from the link below. 
 
 ```
-Give examples
+https://www.oracle.com/java/technologies/javase/jdk14-archive-downloads.html 
 ```
 
 ### Installing
@@ -75,6 +75,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Alexander Walker** - *Continued Work* - [Alex Walker](https://github.com/AWalker2112)
 
 ## License
 
