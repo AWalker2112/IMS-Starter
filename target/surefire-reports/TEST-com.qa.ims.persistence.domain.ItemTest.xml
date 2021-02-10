@@ -60,10 +60,10 @@
   </properties>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getValueTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getItemNameTest" time="0"/>
-  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="toStringTest" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="toStringTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setItemNameTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setValueTest" time="0"/>
-  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="testEquals" time="0.023"/>
+  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="testEquals" time="0.024"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getItemIDTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setItemIDTest" time="0"/>
 </testsuite>
