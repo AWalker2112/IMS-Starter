@@ -81,24 +81,14 @@ public class OrderDAOTest {
 
 	}
 	
-	@Test
-	public void testCreateException() {
-		final Order created = new Order(3l, 200L);
-
-		assertEquals(null, orderDAO.create(created));
-
-	}
+	
 
 	@Test
 	public void deleteTest() {
 		assertEquals(1, orderDAO.delete(1));
 	}
 	
-	@Test
-	public void deleteTestExcetion() {
-		
-		assertEquals(0, orderDAO.delete(2));
-	}
+	
 
 	@Test
 	public void deleteOrderItemsTest() {
