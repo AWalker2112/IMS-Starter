@@ -1,7 +1,7 @@
-Coverage: 34%
-# Project Title
+Coverage: 80.1%
+# IMS Starter Project
 
-One Paragraph of project description goes here
+The Inventory Management System (IMS) allows a user to create customers, items and orders. These are saved to a MySQL database through a CRUDController. This project has used a variety of different technologies to achieve it including JIRA, GitHub, JAVA, Maven, Junit and SonarQube.
 
 ## Getting Started
 
