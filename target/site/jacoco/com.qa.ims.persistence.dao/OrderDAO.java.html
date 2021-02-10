@@ -69,11 +69,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L69">				orders.add(modelFromResultSetAll(resultSetAll));</span>
 			}
 <span class="fc" id="L71">			return orders;</span>
-<span class="nc" id="L72">		} catch (SQLException e) {</span>
-<span class="nc" id="L73">			LOGGER.debug(e);</span>
-<span class="nc" id="L74">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L72">		} catch (SQLException e) {</span>
+<span class="fc" id="L73">			LOGGER.debug(e);</span>
+<span class="fc" id="L74">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L76">		return new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L76">		return new ArrayList&lt;&gt;();</span>
 	}
 
 	/**
@@ -88,11 +88,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L88">				ResultSet resultSet = statement.executeQuery(&quot;SELECT * FROM orders ORDER BY order_id DESC LIMIT 1&quot;);) {</span>
 <span class="fc" id="L89">			resultSet.next();</span>
 <span class="fc" id="L90">			return modelFromResultSet(resultSet);</span>
-<span class="nc" id="L91">		} catch (Exception e) {</span>
-<span class="nc" id="L92">			LOGGER.debug(e);</span>
-<span class="nc" id="L93">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L91">		} catch (Exception e) {</span>
+<span class="fc" id="L92">			LOGGER.debug(e);</span>
+<span class="fc" id="L93">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L95">		return null;</span>
+<span class="fc" id="L95">		return null;</span>
 	}
 
 	/**
@@ -109,11 +109,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L109">						.executeQuery(&quot;SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1&quot;);) {</span>
 <span class="fc" id="L110">			resultSetID.next();</span>
 <span class="fc" id="L111">			return modelFromResultSetID(resultSetID);</span>
-<span class="nc" id="L112">		} catch (Exception e) {</span>
-<span class="nc" id="L113">			LOGGER.debug(e);</span>
-<span class="nc" id="L114">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L112">		} catch (Exception e) {</span>
+<span class="fc" id="L113">			LOGGER.debug(e);</span>
+<span class="fc" id="L114">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L116">		return 0l;</span>
+<span class="fc" id="L116">		return 0l;</span>
 	}
 
 	/**
@@ -136,11 +136,11 @@ import com.qa.ims.utils.DBUtils;
 
 <span class="fc" id="L137">				return orders;</span>
 			}
-<span class="nc" id="L139">		} catch (Exception e) {</span>
-<span class="nc" id="L140">			LOGGER.debug(e);</span>
-<span class="nc" id="L141">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L139">		} catch (Exception e) {</span>
+<span class="fc" id="L140">			LOGGER.debug(e);</span>
+<span class="fc" id="L141">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L143">		return new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L143">		return new ArrayList&lt;&gt;();</span>
 	}
 
 	/**
@@ -158,11 +158,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L158">			statement.executeUpdate();</span>
 <span class="fc" id="L159">			return readLatest();</span>
 
-<span class="nc" id="L161">		} catch (Exception e) {</span>
-<span class="nc" id="L162">			LOGGER.debug(e);</span>
-<span class="nc" id="L163">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L161">		} catch (Exception e) {</span>
+<span class="fc" id="L162">			LOGGER.debug(e);</span>
+<span class="fc" id="L163">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L165">		return null;</span>
+<span class="fc" id="L165">		return null;</span>
 	}
 
 	/**
@@ -177,11 +177,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L177">				PreparedStatement statement = connection.prepareStatement(&quot;DELETE FROM orders WHERE order_id = ?&quot;);) {</span>
 <span class="fc" id="L178">			statement.setLong(1, id);</span>
 <span class="fc" id="L179">			return statement.executeUpdate();</span>
-<span class="nc" id="L180">		} catch (Exception e) {</span>
-<span class="nc" id="L181">			LOGGER.debug(e);</span>
-<span class="nc" id="L182">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L180">		} catch (Exception e) {</span>
+<span class="fc" id="L181">			LOGGER.debug(e);</span>
+<span class="fc" id="L182">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L184">		return 0;</span>
+<span class="fc" id="L184">		return 0;</span>
 	}
 
 	public int deleteOrderItems(long id) {
@@ -191,11 +191,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L191">						.prepareStatement(&quot;DELETE FROM orders_items WHERE fk_order_id = ?&quot;);) {</span>
 <span class="fc" id="L192">			statement.setLong(1, id);</span>
 <span class="fc" id="L193">			return statement.executeUpdate();</span>
-<span class="nc" id="L194">		} catch (Exception e) {</span>
-<span class="nc" id="L195">			LOGGER.debug(e);</span>
-<span class="nc" id="L196">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L194">		} catch (Exception e) {</span>
+<span class="fc" id="L195">			LOGGER.debug(e);</span>
+<span class="fc" id="L196">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L198">		return 0;</span>
+<span class="fc" id="L198">		return 0;</span>
 	}
 
 	/**
@@ -216,12 +216,12 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L216">				return modelFromResultSetCost(resultSet);</span>
 			}
 
-<span class="nc" id="L219">		} catch (Exception e) {</span>
+<span class="fc" id="L219">		} catch (Exception e) {</span>
 
-<span class="nc" id="L221">			LOGGER.debug(e);</span>
-<span class="nc" id="L222">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L221">			LOGGER.debug(e);</span>
+<span class="fc" id="L222">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L224">		return 0;</span>
+<span class="fc" id="L224">		return 0;</span>
 
 	}
 

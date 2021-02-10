@@ -45,11 +45,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L45">				items.add(modelFromResultSet(resultSet));</span>
 			}
 <span class="fc" id="L47">			return items;</span>
-<span class="nc" id="L48">		} catch (SQLException e) {</span>
-<span class="nc" id="L49">			LOGGER.debug(e);</span>
-<span class="nc" id="L50">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L48">		} catch (SQLException e) {</span>
+<span class="fc" id="L49">			LOGGER.debug(e);</span>
+<span class="fc" id="L50">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L52">		return new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L52">		return new ArrayList&lt;&gt;();</span>
 	}
 
 	public Item readLatest() {
@@ -59,11 +59,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L59">				ResultSet resultSet = statement.executeQuery(&quot;SELECT * FROM items ORDER BY item_id DESC LIMIT 1&quot;);) {</span>
 <span class="fc" id="L60">			resultSet.next();</span>
 <span class="fc" id="L61">			return modelFromResultSet(resultSet);</span>
-<span class="nc" id="L62">		} catch (Exception e) {</span>
-<span class="nc" id="L63">			LOGGER.debug(e);</span>
-<span class="nc" id="L64">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L62">		} catch (Exception e) {</span>
+<span class="fc" id="L63">			LOGGER.debug(e);</span>
+<span class="fc" id="L64">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L66">		return null;</span>
+<span class="fc" id="L66">		return null;</span>
 	}
 	
 	/**

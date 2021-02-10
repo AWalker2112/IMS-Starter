@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.qa.ims.utils.DBUtils;
 
-public class OrderItemsDAOTestFail {
+public class OrderItemsDAOFailTest {
 
 	private final OrderItemsDAO Dao = new OrderItemsDAO();
 

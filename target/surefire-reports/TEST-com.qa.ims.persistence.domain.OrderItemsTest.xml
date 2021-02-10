@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="com.qa.ims.persistence.domain.OrderItemsTest" time="0.022" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="com.qa.ims.persistence.domain.OrderItemsTest" time="0.026" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12-46"/>
@@ -66,6 +66,6 @@
   <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="setOrderItemsIDTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="toStringTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="setFkOrderIDTest" time="0"/>
-  <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="testEquals" time="0.022"/>
+  <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="testEquals" time="0.026"/>
   <testcase classname="com.qa.ims.persistence.domain.OrderItemsTest" name="getOrderItemsIDTest" time="0"/>
 </testsuite>

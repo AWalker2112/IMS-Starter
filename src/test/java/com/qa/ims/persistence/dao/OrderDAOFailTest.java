@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.utils.DBUtils;
 
-public class OrderDAOTestFail {
+public class OrderDAOFailTest {
 
 	private final OrderDAO orderDAO = new OrderDAO();
 

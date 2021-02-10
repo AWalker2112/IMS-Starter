@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="com.qa.ims.persistence.dao.OrderItemsDAOTest" time="1.826" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="com.qa.ims.persistence.dao.OrderItemsDAOTest" time="1.752" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12-46"/>
@@ -58,14 +58,14 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readAllTest" time="0.156"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="deleteOrderItemTest" time="0.192"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readTest" time="0.182"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readTestException" time="0.189"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="createTestException" time="0.18"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="updateTest" time="0.212"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readLatestTest" time="0.168"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="createTest" time="0.196"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="deleteTest" time="0.171"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="updateTestException" time="0.18"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readAllTest" time="0.143"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="deleteOrderItemTest" time="0.161"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readTest" time="0.168"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readTestException" time="0.159"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="createTestException" time="0.173"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="updateTest" time="0.187"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="readLatestTest" time="0.17"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="createTest" time="0.236"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="deleteTest" time="0.168"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderItemsDAOTest" name="updateTestException" time="0.187"/>
 </testsuite>

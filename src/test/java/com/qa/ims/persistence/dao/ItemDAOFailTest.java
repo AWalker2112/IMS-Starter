@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.qa.ims.utils.DBUtils;
 
-public class ItemDAOTestFail {
+public class ItemDAOFailTest {
 
 	private final ItemDAO DAO = new ItemDAO();
 

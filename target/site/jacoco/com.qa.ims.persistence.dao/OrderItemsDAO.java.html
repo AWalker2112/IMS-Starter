@@ -66,11 +66,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L66">						.executeQuery(&quot;SELECT * FROM orders_items ORDER BY order_items_id DESC LIMIT 1&quot;);) {</span>
 <span class="fc" id="L67">			resultSet.next();</span>
 <span class="fc" id="L68">			return modelFromResultSet(resultSet);</span>
-<span class="nc" id="L69">		} catch (Exception e) {</span>
-<span class="nc" id="L70">			LOGGER.debug(e);</span>
-<span class="nc" id="L71">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L69">		} catch (Exception e) {</span>
+<span class="fc" id="L70">			LOGGER.debug(e);</span>
+<span class="fc" id="L71">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L73">		return null;</span>
+<span class="fc" id="L73">		return null;</span>
 	}
 
 	
@@ -141,11 +141,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L141">						.prepareStatement(&quot;DELETE FROM orders_items WHERE order_items_id = ?&quot;);) {</span>
 <span class="fc" id="L142">			statement.setLong(1, orderItemsID);</span>
 <span class="fc" id="L143">			return statement.executeUpdate();</span>
-<span class="nc" id="L144">		} catch (Exception e) {</span>
-<span class="nc" id="L145">			LOGGER.debug(e);</span>
-<span class="nc" id="L146">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L144">		} catch (Exception e) {</span>
+<span class="fc" id="L145">			LOGGER.debug(e);</span>
+<span class="fc" id="L146">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L148">		return 0;</span>
+<span class="fc" id="L148">		return 0;</span>
 	}
 	
 	public int deleteOrderItem(long orderID, long itemID) {
@@ -156,11 +156,11 @@ import com.qa.ims.utils.DBUtils;
 <span class="fc" id="L156">			statement.setLong(1, orderID);</span>
 <span class="fc" id="L157">			statement.setLong(2, itemID);</span>
 <span class="fc" id="L158">			return statement.executeUpdate();</span>
-<span class="nc" id="L159">		} catch (Exception e) {</span>
-<span class="nc" id="L160">			LOGGER.debug(e);</span>
-<span class="nc" id="L161">			LOGGER.error(e.getMessage());</span>
+<span class="fc" id="L159">		} catch (Exception e) {</span>
+<span class="fc" id="L160">			LOGGER.debug(e);</span>
+<span class="fc" id="L161">			LOGGER.error(e.getMessage());</span>
 		}
-<span class="nc" id="L163">		return 0;</span>
+<span class="fc" id="L163">		return 0;</span>
 	}
 
 }
