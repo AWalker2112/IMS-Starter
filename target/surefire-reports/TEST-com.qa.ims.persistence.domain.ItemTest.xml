@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="com.qa.ims.persistence.domain.ItemTest" time="0.021" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="com.qa.ims.persistence.domain.ItemTest" time="0.019" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12-46"/>
@@ -60,10 +60,10 @@
   </properties>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getValueTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getItemNameTest" time="0"/>
-  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="toStringTest" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="toStringTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setItemNameTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setValueTest" time="0"/>
-  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="testEquals" time="0.02"/>
+  <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="testEquals" time="0.019"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="getItemIDTest" time="0"/>
   <testcase classname="com.qa.ims.persistence.domain.ItemTest" name="setItemIDTest" time="0"/>
 </testsuite>

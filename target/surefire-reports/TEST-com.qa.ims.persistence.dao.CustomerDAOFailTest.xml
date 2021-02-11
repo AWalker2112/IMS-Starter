@@ -59,6 +59,6 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="com.qa.ims.persistence.dao.CustomerDAOFailTest" name="testReadLatest" time="0.025"/>
-  <testcase classname="com.qa.ims.persistence.dao.CustomerDAOFailTest" name="testReadAll" time="0.002"/>
-  <testcase classname="com.qa.ims.persistence.dao.CustomerDAOFailTest" name="testCreate" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.dao.CustomerDAOFailTest" name="testReadAll" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.dao.CustomerDAOFailTest" name="testCreate" time="0.002"/>
 </testsuite>

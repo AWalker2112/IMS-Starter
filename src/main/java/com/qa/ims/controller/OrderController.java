@@ -40,7 +40,7 @@ public class OrderController implements CrudController<Order> {
 		this.utils = utils;
 	}
 
-	String costString = "The total cost for this order is: £";
+	String costString = "The total cost for this order is: ";
 	String incorrectString = "Incorrect statement";
 
 	@Override
