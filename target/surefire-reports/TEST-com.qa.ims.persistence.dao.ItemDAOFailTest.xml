@@ -58,6 +58,6 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.qa.ims.persistence.dao.ItemDAOFailTest" name="testReadLatest" time="0.001"/>
-  <testcase classname="com.qa.ims.persistence.dao.ItemDAOFailTest" name="testReadAll" time="0.003"/>
+  <testcase classname="com.qa.ims.persistence.dao.ItemDAOFailTest" name="testReadLatest" time="0.002"/>
+  <testcase classname="com.qa.ims.persistence.dao.ItemDAOFailTest" name="testReadAll" time="0.002"/>
 </testsuite>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="com.qa.ims.persistence.dao.OrderDAOFailTest" time="0.01" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="com.qa.ims.persistence.dao.OrderDAOFailTest" time="0.011" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12-46"/>
@@ -58,12 +58,12 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readAllTest" time="0"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readAllTest" time="0.002"/>
   <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readIDTest" time="0.001"/>
   <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="testCreateException" time="0.002"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readLatestTest" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readLatestTest" time="0.002"/>
   <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="orderCostTest" time="0.001"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="deleteTestExcetion" time="0.002"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="deleteTestExcetion" time="0.001"/>
   <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="deleteOrderItemsTest" time="0.002"/>
-  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readAllFormatedSingleOrderTest" time="0.001"/>
+  <testcase classname="com.qa.ims.persistence.dao.OrderDAOFailTest" name="readAllFormatedSingleOrderTest" time="0"/>
 </testsuite>
