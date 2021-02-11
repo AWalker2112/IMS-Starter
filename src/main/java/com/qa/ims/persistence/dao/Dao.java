@@ -17,4 +17,8 @@ public interface Dao<T> {
 	int delete(long id);
 
 	T modelFromResultSet(ResultSet resultSet) throws SQLException;
+
+	
+
+	
 }

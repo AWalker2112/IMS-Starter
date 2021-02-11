@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package com.qa.ims.controller;
+
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+
+import org.apache.logging.log4j.Logger;
+
+import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.OrderItemsDAO;
+
+import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.domain.OrderItems;
+import com.qa.ims.utils.Utils;
+
+public class OrderController implements CrudController&lt;Order&gt; {
+
+<span class="fc" id="L18">	public static final Logger LOGGER = LogManager.getLogger();</span>
+
+	private OrderDAO orderDAO;
+<span class="pc" id="L21">	private OrderItemsDAO orditeDAO = new OrderItemsDAO();</span>
+<span class="pc" id="L22">	private Utils utils = new Utils();</span>
+
+	public OrderController(OrderDAO orderDAO, Utils utils) {
+<span class="nc" id="L25">		super();</span>
+<span class="nc" id="L26">		this.orderDAO = orderDAO;</span>
+<span class="nc" id="L27">		this.utils = utils;</span>
+<span class="nc" id="L28">	}</span>
+
+	public OrderController(OrderItemsDAO orditeDAO, Utils utils) {
+<span class="nc" id="L31">		super();</span>
+<span class="nc" id="L32">		this.orditeDAO = orditeDAO;</span>
+<span class="nc" id="L33">		this.utils = utils;</span>
+<span class="nc" id="L34">	}</span>
+
+	public OrderController(OrderDAO orderDAO, OrderItemsDAO orditeDAO, Utils utils) {
+<span class="fc" id="L37">		super();</span>
+<span class="fc" id="L38">		this.orderDAO = orderDAO;</span>
+<span class="fc" id="L39">		this.orditeDAO = orditeDAO;</span>
+<span class="fc" id="L40">		this.utils = utils;</span>
+<span class="fc" id="L41">	}</span>
+
+<span class="pc" id="L43">	String costString = &quot;The total cost for this order is: &quot;;</span>
+<span class="pc" id="L44">	String incorrectString = &quot;Incorrect statement&quot;;</span>
+
+	@Override
+	public List&lt;Order&gt; readAll() {
+
+		while (true) {
+<span class="fc" id="L50">			LOGGER.info(</span>
+					&quot;Please choose (All/Single/Return)\nALL: All items in all orders\nSINGLE: Specific order\nRETURN: Return to the menu before&quot;);
+<span class="fc" id="L52">			String choice = utils.getString();</span>
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">			if (choice.equalsIgnoreCase(&quot;all&quot;)) {</span>
+<span class="fc" id="L55">				List&lt;Order&gt; orders = orderDAO.readAll();</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">				for (Order order : orders) {</span>
+<span class="fc" id="L57">					LOGGER.info(order);</span>
+<span class="fc" id="L58">				}</span>
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">			} else if (choice.equalsIgnoreCase(&quot;single&quot;)) {</span>
+<span class="fc" id="L61">				LOGGER.info(&quot;Please enter a order ID&quot;);</span>
+<span class="fc" id="L62">				Long fkOrderID = utils.getLong();</span>
+<span class="fc" id="L63">				List&lt;Order&gt; orders = orderDAO.readAllFormatedSingleOrder(fkOrderID);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">				for (Order order : orders) {</span>
+<span class="fc" id="L65">					LOGGER.info(order);</span>
+
+<span class="fc" id="L67">				}</span>
+<span class="fc" id="L68">				LOGGER.info(costString + orderDAO.orderCost(fkOrderID));</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">			} else if (choice.equalsIgnoreCase(&quot;return&quot;)) {</span>
+
+<span class="fc" id="L72">				return orderDAO.readAll();</span>
+			}
+
+			else {
+<span class="fc" id="L76">				LOGGER.info(incorrectString);</span>
+
+			}
+
+<span class="fc" id="L80">		}</span>
+
+	}
+
+	/**
+	 * Creates an order by taking in user input
+	 */
+
+	@Override
+	public Order create() {
+
+<span class="fc" id="L91">		LOGGER.info(&quot;Please enter a customer ID&quot;);</span>
+<span class="fc" id="L92">		Long fkCustomerID = utils.getLong();</span>
+<span class="fc" id="L93">		Order order = orderDAO.create(new Order(fkCustomerID));</span>
+<span class="fc" id="L94">		createItem();</span>
+
+<span class="fc" id="L96">		LOGGER.info(&quot;Order created&quot;);</span>
+
+		while (true) {
+<span class="fc" id="L99">			LOGGER.info(&quot;Would you like to add an item? (Y/N)&quot;);</span>
+<span class="fc" id="L100">			String yesNo = utils.getString();</span>
+
+<span class="fc bfc" id="L102" title="All 2 branches covered.">			if (yesNo.equalsIgnoreCase(&quot;N&quot;)) {</span>
+<span class="fc" id="L103">				return order;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">			} else if (yesNo.equalsIgnoreCase(&quot;Y&quot;)) {</span>
+
+<span class="fc" id="L106">				createItem();</span>
+
+<span class="fc" id="L108">				continue;</span>
+			} else {
+<span class="fc" id="L110">				LOGGER.info(incorrectString);</span>
+<span class="fc" id="L111">				continue;</span>
+			}
+		}
+
+	}
+
+	/**
+	 * Creates a item into an order by taking in user input
+	 */
+
+	public OrderItems createItem() {
+
+<span class="fc" id="L123">		Long fkOrderID = orderDAO.readID();</span>
+
+<span class="fc" id="L125">		LOGGER.info(&quot;Please enter a item ID&quot;);</span>
+<span class="fc" id="L126">		Long fkItemID = utils.getLong();</span>
+
+<span class="fc" id="L128">		LOGGER.info(&quot;Please enter a quantity&quot;);</span>
+<span class="fc" id="L129">		Long quantity = utils.getLong();</span>
+
+<span class="fc" id="L131">		OrderItems orderitem = orditeDAO.create(new OrderItems(fkOrderID, fkItemID, quantity));</span>
+
+<span class="fc" id="L133">		LOGGER.info(&quot;Item added&quot;);</span>
+
+<span class="fc" id="L135">		LOGGER.info(costString + orderDAO.orderCost(fkOrderID));</span>
+<span class="fc" id="L136">		return orderitem;</span>
+
+	}
+
+	/**
+	 * Creates a updates an order either adding or removing an item by taking in
+	 * user input
+	 */
+
+	@Override
+	public Order update() {
+		
+
+		while (true) {
+<span class="fc" id="L150">			LOGGER.info(</span>
+					&quot;Would you like to add or remove an item? (Add/Remove/Return) \nADD: Add an item to a order \nREMOVE: Remove an item from a order \nRETURN: Return to the menu before&quot;);
+<span class="fc" id="L152">			String addRemove = utils.getString();</span>
+
+<span class="fc bfc" id="L154" title="All 2 branches covered.">			if (addRemove.equalsIgnoreCase(&quot;return&quot;)) {</span>
+<span class="fc" id="L155">				return null;</span>
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">			} else if (addRemove.equalsIgnoreCase(&quot;add&quot;)) {</span>
+
+<span class="fc" id="L159">				updateItem();</span>
+
+				
+<span class="fc bfc" id="L162" title="All 2 branches covered.">			} else if (addRemove.equalsIgnoreCase(&quot;remove&quot;)) {</span>
+
+<span class="fc" id="L164">				deleteItem();</span>
+			} else {
+<span class="fc" id="L166">				LOGGER.info(incorrectString);</span>
+				
+			}
+<span class="fc" id="L169">		}</span>
+
+	}
+
+	/**
+	 * Updates an existing Item by taking in user input
+	 */
+
+	public OrderItems updateItem() {
+
+<span class="fc" id="L179">		LOGGER.info(&quot;Please enter a order ID&quot;);</span>
+<span class="fc" id="L180">		Long fkOrderID = utils.getLong();</span>
+
+<span class="fc" id="L182">		LOGGER.info(&quot;Please enter a item ID&quot;);</span>
+<span class="fc" id="L183">		Long fkItemID = utils.getLong();</span>
+
+<span class="fc" id="L185">		LOGGER.info(&quot;Please enter a quantity&quot;);</span>
+<span class="fc" id="L186">		Long quantity = utils.getLong();</span>
+
+<span class="fc" id="L188">		OrderItems orderitem = orditeDAO.create(new OrderItems(fkOrderID, fkItemID, quantity));</span>
+
+<span class="fc" id="L190">		LOGGER.info(&quot;Item and quantity has been added to a order&quot;);</span>
+
+<span class="fc" id="L192">		LOGGER.info(costString + orderDAO.orderCost(fkOrderID));</span>
+<span class="fc" id="L193">		return orderitem;</span>
+	}
+
+	@Override
+	public int delete() {
+
+<span class="fc" id="L199">		LOGGER.info(&quot;Please enter the id of the order you would like to delete&quot;);</span>
+<span class="fc" id="L200">		Long orderID = utils.getLong();</span>
+<span class="fc" id="L201">		orderDAO.deleteOrderItems(orderID);</span>
+<span class="fc" id="L202">		return orderDAO.delete(orderID);</span>
+	}
+
+	/**
+	 * Deletes an existing item by the id of the item in the order
+	 * 
+	 * @return
+	 */
+
+	public int deleteItem() {
+
+<span class="fc" id="L213">		LOGGER.info(&quot;Please enter the id of the order&quot;);</span>
+<span class="fc" id="L214">		Long orderID = utils.getLong();</span>
+
+<span class="fc" id="L216">		LOGGER.info(&quot;Please enter the id of the item you would like to delete&quot;);</span>
+<span class="fc" id="L217">		Long itemsID = utils.getLong();</span>
+
+<span class="fc" id="L219">		return orditeDAO.deleteOrderItem(orderID, itemsID);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
