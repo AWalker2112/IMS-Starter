@@ -109,6 +109,11 @@ CustomerControllerTest.java
 
 We use [SemVer](http://semver.org/) for versioning.
 
+## JIRA Board
+
+```
+https://awalker.atlassian.net/secure/RapidBoard.jspa?projectKey=QIS&rapidView=2&view=planning.nodetail&atlOrigin=eyJpIjoiMTAxZjliMjQ4ZmJiNGI5NWEzNWExODI0MzRiN2IyMjIiLCJwIjoiaiJ9
+```
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
